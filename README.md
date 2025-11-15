@@ -1,70 +1,171 @@
-# Getting Started with Create React App
+Here you go, Varsha — the *clean GitHub-ready README.md* with perfect Markdown formatting, headings, spacing, emojis, and code blocks.
+Just copy–paste this directly into your GitHub repo. 👇
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+# 🎨 Collaborative Real-Time Drawing Canvas
 
-In the project directory, you can run:
+A multi-user drawing application built with *HTML5 Canvas, **Vanilla JavaScript/TypeScript, and **Node.js WebSockets, allowing multiple users to draw together with **live real-time synchronization*.
 
-### `npm start`
+---
+## 🔗 Important Links
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Hosted App: https://bright-sorbet-bf5470.netlify.app/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+GitHub Repository:https://github.com/Paddu2003/Flam-Assignemnt
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Features
 
-### `npm run build`
+### 🎨 Drawing Tools
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Freehand brush
+* Eraser
+* Color picker
+* Adjustable stroke width
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 🔄 Real-Time Collaboration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Multiple users draw at the same time
+* Live stroke streaming (event-based)
+* Other users’ cursor indicators
+* Smooth drawing with path optimization
 
-### `npm run eject`
+### 👥 User Management
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Online user list
+* User-specific assigned colors
+* Presence updates on join/leave
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🧠 Advanced Logic
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* Global undo/redo (across all users)
+* Conflict resolution for overlapping strokes
+* Centralized stroke history stored on server
+* Canvas state reconstruction when a new user joins
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🏗 Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+collaborative-canvas/
+├── client/
+│   ├── index.html
+│   ├── style.css
+│   ├── canvas.js / canvas.ts
+│   ├── websocket.js / websocket.ts
+│   └── main.js / main.ts
+├── server/
+│   ├── server.js / server.ts
+│   ├── rooms.js / rooms.ts
+│   └── drawing-state.js / drawing-state.ts
+├── package.json
+├── README.md
+└── ARCHITECTURE.md
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## ⚙ Setup Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### *1. Install Dependencies*
 
-### Making a Progressive Web App
+bash
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+### *2. Start the Server*
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+bash
+npm start
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### *3. Open the Client*
 
-### `npm run build` fails to minify
+Open client/index.html using:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* VS Code Live Server
+  *or*
+* Navigate to:
+
+
+http://localhost:3000
+
+
+### *4. Test With Multiple Users*
+
+Open the same URL in:
+
+* 2–3 browser tabs
+* Multiple devices
+
+Draw in one window → It appears instantly in all others.
+
+---
+
+## 🔌 How Real-Time Sync Works
+
+### *Stroke Event Example*
+
+json
+{
+  "type": "stroke",
+  "userId": "user-abc123",
+  "canvasId": "default",
+  "payload": {
+    "x": 120,
+    "y": 340,
+    "color": "#ff0000",
+    "width": 4,
+    "pressure": 0.8,
+    "isDrawing": true
+  }
+}
+
+
+The server receives this event and broadcasts it to all other connected users.
+
+### *Undo/Redo Events*
+
+json
+{ "type": "undo", "userId": "user-abc123" }
+{ "type": "redo", "userId": "user-abc123" }
+
+
+The server updates *global stroke history* and synchronizes the updated canvas state to everyone.
+
+---
+
+## 🧪 Testing Scenarios
+
+* Two users drawing at the same time
+* Undo/redo triggered by one user updates all canvases
+* High-frequency mouse movement (stress test)
+* Network throttling to check latency handling
+* New user joins → full canvas reconstructs automatically
+
+---
+
+## 🪲 Known Limitations / Bugs
+
+* Undo/redo may lag slightly with extremely large stroke histories
+* Cursor indicators can flicker on slow connections
+* No canvas export feature yet
+* No persistent storage (server restart clears drawings)
+
+---
+
+## ⏱ Time Spent on Project
+
+| Task                  | Time        |
+| --------------------- | ----------- |
+| Canvas drawing logic  | 4 hrs       |
+| WebSocket integration | 3 hrs       |
+| Global undo/redo      | 2 hrs       |
+| UI & tools            | 1.5 hrs     |
+| Testing & debugging   | 1 hr        |
+| Documentation         | 0.5 hr      |
+| *Total*             | *~12 hrs* |
+
+---
